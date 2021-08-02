@@ -1,0 +1,17 @@
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+    <a href="{% url 'home' %}" class="navbar-brand">Meus Produtos</a>
+    <ul class="ul-nav">
+        <li>
+            <a href="{% url 'creat-product' %}">
+                Cadastrar Produtos
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'logout' %}">
+                <i class="fas fa-sign-out-alt fa"></i>
+                SAIR
+            </a>
+        </li>
+    </ul>
+
+</nav>

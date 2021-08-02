@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+{% for product in object_list %}
+
+<div class="container">
+ 
+    <div class="row">
+        <div class="col-sm">
+            <img class="img-product" src="{{ product.image.url }}" alt="">
+        </div>
+        <div class="col-sm">
+            Produto: {{ product.title }}
+        </div>
+        <div class="col-sm">
+            Quantidade: {{ product.quantity }}
+        </div>
+        <div class="col-sm">
+            R$: {{ product.price }}
+        </div>
+        <div class="col-sm">
+            Valor Total: {{ product.p_total }}
+        </div>
+        <div class="col-sm">
+            <a href="{% url 'edit-product' product.id %}">
+                <i class="fas fa-edit fa-lg"></i>
+            </a>
+            <a href="{% url 'delete-product' product.id %}">
+                <i class="fas fa-trash fa-lg"></i>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+{% endfor %}
+
+<ul class="pagination">
+    {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+    {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+    {% endif %}
+
+    {% for object in page_obj.paginator.page_range %}
+        <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+    {% endfor %}
+    
+    {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Proximo</a></li>
+    {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#">Proximo</a></li>
+    {% endif %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+
+{% extends 'base.html' %}
+
+{% block main %}
+
+<form method="POST" class="product-delete"> {% csrf_token %}
+
+    <h3>Deletar Produtos</h3>
+
+    <h1>Tem certeza que deseja Deletar esse Produto?</h1>
+    {{ form }}
+    
+    <button type="submit" class="btn btn-danger">Confimar</button>
+</form>
+
+{% endblock %}

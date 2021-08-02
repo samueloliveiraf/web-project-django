@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    border: solid 2px #141414;
+    border-radius: 4px;
+    margin-top: 37px;
+    padding: 12px;
+}
+
+.img-product {
+    height: 3rem;
+    border-radius: 4px;
+    border: solid 2px #141414;
+}
+
+.fa-trash {
+    color: #141414;
+    margin-left: 32px;
+    transition: 0.2s;
+}
+
+.fa-trash:hover {
+    color: rgb(158, 41, 41);
+}
+
+.fa-edit {
+    color: #141414;
+    transition: 0.2s;
+}
+
+.fa-edit:hover {
+    color: rgb(41, 41, 129);
+}
+
+nav {
+    padding: 20px;
+}
+
+.navbar-brand:hover {
+    color: rgb(65, 53, 238);
+}
+
+.ul-nav li {
+    display: inline;
+    margin-left: 12px;
+    font-size: 15px;
+    position: relative;
+    align-items: center;
+    top: 8px;
+}
+
+li {
+    list-style-type: none;
+    color: white;
+}
+
+ul a {
+    text-decoration: none;
+    color: #b1b1b1;
+    transition: 0.2S;
+}
+
+input[type='file'] {
+    margin: 8px 0px 8px 0px;
+}
+
+.pagination {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 120px;
+}
+
+li .page-link {
+    background-color: #141414;
+    color: white;
+}
+
+.form-product {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.form-control {
+    margin-top: 11px;
+}
+
+.btn-style {
+    width: 180px;
+    margin-top: 12px;
+}
+
+.product-delete {
+    padding: 40px;
+}
