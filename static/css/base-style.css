@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-
 html, body {
     height: 100%;
 }
@@ -103,4 +102,28 @@ li .page-link {
 
 .product-delete {
     padding: 40px;
+}
+
+.mb-1 {
+    margin-left: 90px;
+    width: 250px;
+}
+
+.btn-dark {
+    margin-top: 5px;
+}
+
+.btn {
+    height: 40px;
+    margin-top: 11px;
+}
+
+.fa-money-check-alt {
+    color: #141414;
+    margin-left: 32px;
+    transition: 0.2s;
+}
+
+.fa-money-check-alt:hover {
+    color: rgb(49, 95, 49);
 }

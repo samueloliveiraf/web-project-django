@@ -1,5 +1,6 @@
 from products.form import CustumerForm
 from django.urls import reverse_lazy
+from django.db.models import Q
 from .models import *
 
 from django.views.generic import (
@@ -27,6 +28,16 @@ class ListProducts(ListView):
         queryset = super(ListProducts, self).get_queryset()
         queryset = queryset.filter(user=self.request.user)
         return queryset
+
+    def get_queryset(self):
+        title = self.request.GET.get('title')
+        if title:
+            object_list = self.model.objects.filter(
+                Q(title__icontains=title)
+            )
+        else:
+            object_list = self.model.objects.all()
+        return object_list
 
 
 class EditProduct(UpdateView):
