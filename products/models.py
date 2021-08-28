@@ -12,10 +12,8 @@ class Product(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-
     def get_absolute_url(self):
         return reverse('home')
-    
 
     def p_total(self):
         total = self.price * self.quantity
@@ -26,3 +24,11 @@ class Product(models.Model):
 
     class Meta:
         db_table = 'produtos'
+
+
+class Sale(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return self.product.title

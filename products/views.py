@@ -1,4 +1,5 @@
 from products.form import CustumerForm
+from django.contrib import messages
 from django.urls import reverse_lazy
 from django.db.models import Q
 from .models import *
@@ -48,3 +49,12 @@ class EditProduct(UpdateView):
 class DeleteProduct(DeleteView):
     model = Product
     success_url = reverse_lazy('home')
+
+
+def sale(request):
+    product = Product.objects.get()
+    sale = Sale.objects.get()
+    if product.quantity > 0:
+        product.quantity = sale.quantity - product.quantity
+        product.quantity.save()
+    return product

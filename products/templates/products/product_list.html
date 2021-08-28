@@ -4,38 +4,45 @@
 
 {% for product in object_list %}
 
-<div class="container">
-
-    <div class="row">
-        <div class="col-sm">
-            <img class="img-product" src="{{ product.image.url }}" alt="">
-        </div>
-        <div class="col-sm">
-            Produto: {{ product.title }}
-        </div>
-        <div class="col-sm">
-            Quantidade: {{ product.quantity }}
-        </div>
-        <div class="col-sm">
-            R$: {{ product.price }}
-        </div>
-        <div class="col-sm">
-            Valor Total: {{ product.p_total }}
-        </div>
-        <div class="col-sm">
-            <a href="{% url 'edit-product' product.id %}">
-                <i class="fas fa-edit fa-lg"></i>
-            </a>
-            <a href="{% url 'delete-product' product.id %}">
-                <i class="fas fa-trash fa-lg"></i>
-            </a>
-            <a  href="">
-                <i class="fas fa-money-check-alt fa-lg"></i>
-            </a>
+<div class="container mt-5 mb-5 shadow p-3 mb-5 bg-white rounded">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+            <div class="row p-2 bg-white">
+                <div class="col-md-3 mt-1">
+                    <img class="img-fluid img-responsive rounded product-image"
+                        src="{{ product.image.url }}">
+                </div>
+                <div class="col-md-6 mt-1">
+                    <h5>Produto: {{ product.title }}</h5>
+                    <p class="text-justify">Detalhamento: {{product.details}}<br><br></p>
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <div class="d-flex flex-row align-items-center">
+                        <h4 class="mr-1">$13.99</h4><span class="strike-text">Qtd: {{ product.quantity }}</span>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <a href="{% url 'edit-product' product.id %}">
+                            <button class="btn btn-dark" type="button">
+                                Editar <i class="fas fa-edit fa-lg"></i>
+                            </button>
+                        </a>
+                        <a href="{% url 'delete-product' product.id %}">
+                            <button class="btn btn-dark" type="button">
+                                Excluir <i class="fas fa-trash fa-lg"></i>
+                            </button>
+                        </a>
+                        <a href="">
+                            <button class="btn btn-dark" type="button">
+                                Vender <i class="fas fa-money-check-alt fa-lg"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
+
 
 {% endfor %}
 
@@ -56,5 +63,6 @@
     <li class="page-item disabled"><a class="page-link" href="#">Proximo</a></li>
     {% endif %}
 </ul>
+
 
 {% endblock %}

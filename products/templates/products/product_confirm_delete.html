@@ -1,16 +1,30 @@
-
 {% extends 'base.html' %}
 
 {% block main %}
 
 <form method="POST" class="product-delete"> {% csrf_token %}
-
-    <h3>Deletar Produtos</h3>
-
-    <h1>Tem certeza que deseja Deletar esse Produto?</h1>
-    {{ form }}
+    <div class="container mt-5 mb-5 shadow p-3 mb-5 bg-white rounded">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                <div class="row p-2 bg-white">
+                    <h3>Tem certeza que deseja Deletar esse Produto? </h3>
+                    <h3> Produto: {{ product.title }}</h3>
+                    <div class="col-md-3 mt-1">
+                        <img class="img-fluid img-responsive rounded product-image"
+                            src="{{ product.image.url }}">
+                    </div>
+                    
+                    {{ form }}
+                </div>
+                <button type="submit" class="btn btn-danger">Confimar</button>
+            </div>
+            
+        </div>
+        
+    </div>
+   
     
-    <button type="submit" class="btn btn-danger">Confimar</button>
+   
 </form>
 
 {% endblock %}
