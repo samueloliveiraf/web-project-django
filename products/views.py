@@ -30,15 +30,15 @@ class ListProducts(ListView):
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
-    def get_queryset(self):
-        title = self.request.GET.get('title')
-        if title:
-            object_list = self.model.objects.filter(
-                Q(title__icontains=title)
-            )
-        else:
-            object_list = self.model.objects.all()
-        return object_list
+    # def get_queryset(self):
+    #     title = self.request.GET.get('title')
+    #     if title:
+    #         object_list = self.model.objects.filter(
+    #             Q(title__icontains=title)
+    #         )
+    #     else:
+    #         object_list = self.model.objects.all()
+    #     return object_list
 
 
 class EditProduct(UpdateView):
