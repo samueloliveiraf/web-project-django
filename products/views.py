@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.db.models import Q
 from .models import *
+from django.shortcuts import render
 
 from django.views.generic import (
     ListView,
@@ -30,15 +31,17 @@ class ListProducts(ListView):
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
-    # def get_queryset(self):
-    #     title = self.request.GET.get('title')
-    #     if title:
-    #         object_list = self.model.objects.filter(
-    #             Q(title__icontains=title)
-    #         )
-    #     else:
-    #         object_list = self.model.objects.all()
-    #     return object_list
+
+def search_products(request):
+    template_name = 'search_product.html'
+    title = request.GET.get('title')
+    products = Product.objects.filter(title__icontains=title, user=request.user)
+
+    context = {
+        'products': products
+    }
+
+    return render(request, template_name, context)
 
 
 class EditProduct(UpdateView):

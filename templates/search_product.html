@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+{% for product in products %}
+
+<div class="container mt-5 mb-5 shadow p-3 mb-5 bg-white rounded">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+            <div class="row p-2 bg-white">
+                <div class="col-md-3 mt-1">
+                    <img class="img-fluid img-responsive rounded product-image"
+                        src="{{ product.image.url }}">
+                </div>
+                <div class="col-md-6 mt-1">
+                    <h5>Produto: {{ product.title }}</h5>
+                    <p class="text-justify">Detalhamento: {{product.details}}<br><br></p>
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <div class="d-flex flex-row align-items-center">
+                        <h4 class="mr-1">$13.99</h4><span class="strike-text">Qtd: {{ product.quantity }}</span>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <a href="{% url 'edit-product' product.id %}">
+                            <button class="btn btn-dark" type="button">
+                                Editar <i class="fas fa-edit fa-lg"></i>
+                            </button>
+                        </a>
+                        <a href="{% url 'delete-product' product.id %}">
+                            <button class="btn btn-dark" type="button">
+                                Excluir <i class="fas fa-trash fa-lg"></i>
+                            </button>
+                        </a>
+                        <a href="">
+                            <button class="btn btn-dark" type="button">
+                                Vender <i class="fas fa-money-check-alt fa-lg"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endfor %}
+
+<ul class="pagination">
+    {% if page_obj.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+    {% else %}
+    <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+    {% endif %}
+
+    {% for object in page_obj.paginator.page_range %}
+    <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Proximo</a></li>
+    {% else %}
+    <li class="page-item disabled"><a class="page-link" href="#">Proximo</a></li>
+    {% endif %}
+</ul>
+
+
+{% endblock %}

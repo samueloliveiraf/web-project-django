@@ -20,19 +20,18 @@
     <title> {% block title %} Home {% endblock %} </title>
 </head>
 
-<body class="d-flex flex-column">
+<body>
 
     <header>
         {% include "model-header.html" %}
     </header>
 
-    <main class="content">
-
+    <div class="content">
         {% block main %}
 
         {% endblock %}
-
-    </main>
+    </div>
+   
 
 </body>
 
