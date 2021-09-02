@@ -7,7 +7,7 @@ class Product(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     price = models.DecimalField(max_digits=12, decimal_places=2)
-    quantity = models.PositiveIntegerField()
+    quantity = models.IntegerField(default=0)
     details = models.CharField(max_length=250, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -27,8 +27,9 @@ class Product(models.Model):
 
 
 class Sale(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=False,null=False)
+    time = models.DateTimeField(auto_now=True)
+    quantity = models.IntegerField()
 
     def __str__(self):
-        return self.product.title
+	    return '{} {} {}'.format(self.product.quantity, self.product.title, self.time)

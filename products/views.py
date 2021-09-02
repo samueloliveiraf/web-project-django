@@ -1,5 +1,5 @@
 from products.form import CustumerForm
-from django.contrib import messages
+from django import forms
 from django.urls import reverse_lazy
 from django.db.models import Q
 from .models import *
@@ -32,18 +32,6 @@ class ListProducts(ListView):
         return queryset
 
 
-def search_products(request):
-    template_name = 'search_product.html'
-    title = request.GET.get('title')
-    products = Product.objects.filter(title__icontains=title, user=request.user)
-
-    context = {
-        'products': products
-    }
-
-    return render(request, template_name, context)
-
-
 class EditProduct(UpdateView):
     model = Product
     form_class = CustumerForm
@@ -54,10 +42,36 @@ class DeleteProduct(DeleteView):
     success_url = reverse_lazy('home')
 
 
-def sale(request):
-    product = Product.objects.get()
-    sale = Sale.objects.get()
+def search_products(request):
+    template_name = 'search_product.html'
+    title = request.GET.get('title')
+    products = Product.objects.filter(
+        title__icontains=title, user=request.user
+    )
+
+    context = {
+        'products': products
+    }
+
+    return render(request, template_name, context)
+
+
+def sale_product(request, id_product):
+    template_name = 'sale_product.html'
+    product = Product.objects.get(id=id_product)
     if product.quantity > 0:
-        product.quantity = sale.quantity - product.quantity
-        product.quantity.save()
-    return product
+        quantity = request.POST.get("quantity")
+        quantity = 1
+
+    sales = Sale(quantity=quantity, product=product)
+    sales.save()
+    product.quantity = product.quantity-int(quantity)
+    product.save()
+
+    context = {
+        'sales': sales,
+        'quantity': quantity, 
+        'product': product,
+    }
+
+    return render(request, template_name, context)
