@@ -27,9 +27,24 @@ class Product(models.Model):
 
 
 class Sale(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=False,null=False)
     time = models.DateTimeField(auto_now=True)
+    payment = models.CharField(max_length=100)
     quantity = models.IntegerField()
 
+    class Meta:
+        ordering = ('time',)
+
+    def total_sale(self):
+        total = self.product.price * self.quantity
+        return total
+
     def __str__(self):
-	    return '{} {} {}'.format(self.product.quantity, self.product.title, self.time)
+	    return '{} {} {} {} {}'.format(
+            self.quantity, 
+            self.product.quantity, 
+            self.product.title, 
+            self.time,
+            self.payment,
+        )

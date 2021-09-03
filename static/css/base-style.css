@@ -155,3 +155,24 @@ h5 {
 .btn .btn-danger {
     margin-top: 70px;
 }
+
+.form-sale {
+    margin-top: 10px;
+    width: 180px;
+    text-align: center;
+    border: #4e4e4e 2px solid;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.container {
+    border: #4e4e4e 2px solid;
+}
+
+.img-fluid {
+    border: #4e4e4e 2px solid; 
+}
+
+/* CARD */
+
+

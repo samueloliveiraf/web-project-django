@@ -1,9 +1,8 @@
-from products.form import CustumerForm
-from django import forms
+from products.form import *
 from django.urls import reverse_lazy
-from django.db.models import Q
+from django.contrib import messages
 from .models import *
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.views.generic import (
     ListView,
@@ -25,6 +24,7 @@ class CreateProduct(CreateView):
 class ListProducts(ListView):
     model = Product
     paginate_by = 4
+    ordering = ['-date']
 
     def get_queryset(self):
         queryset = super(ListProducts, self).get_queryset()
@@ -40,6 +40,44 @@ class EditProduct(UpdateView):
 class DeleteProduct(DeleteView):
     model = Product
     success_url = reverse_lazy('home')
+
+
+def list_sales(request):
+    template_name = 'products/list_sales.html'
+    sales = Sale.objects.filter(
+        user=request.user
+    )
+
+    product = Product.objects.filter(
+        user=request.user
+    )
+
+    context = {
+        'sales': sales,
+        'product': product,
+    }
+
+    return render(request, template_name, context)
+
+
+class ListSales(ListView):
+    model = Sale
+    paginate_by = 80
+
+    def get_queryset(self):
+        queryset = super(ListSales, self).get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+
+
+def delete_product(request, id_product):
+    product = Product.objects.get(
+        id=id_product,
+        user=request.user
+    )
+
+    product.delete()
+
+    return redirect('home')
 
 
 def search_products(request):
@@ -58,19 +96,25 @@ def search_products(request):
 
 def sale_product(request, id_product):
     template_name = 'sale_product.html'
-    product = Product.objects.get(id=id_product)
-    if product.quantity > 0:
-        quantity = request.POST.get("quantity")
-        quantity = 1
+    product = Product.objects.get(id=id_product, user=request.user)
 
-    sales = Sale(quantity=quantity, product=product)
+    quantity = request.POST.get("quantity")
+    payment = request.POST.get("payment")
+
+    sales = Sale(
+        quantity=quantity,
+        product=product, 
+        payment=payment,
+        user=request.user,
+    )
     sales.save()
+    
     product.quantity = product.quantity-int(quantity)
     product.save()
 
     context = {
         'sales': sales,
-        'quantity': quantity, 
+        'quantity': quantity,
         'product': product,
     }
 

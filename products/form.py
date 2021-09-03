@@ -1,6 +1,20 @@
 
 from django import forms
-from .models import Product
+from .models import Product, Sale
+
+
+class SaleForm(forms.Form):
+    quantity = forms.IntegerField(label='Infome a quantidade')
+    paymente = forms.ModelChoiceField(
+        queryset=Sale.objects.all()
+    )
+
+    class Meta:
+        model = Sale
+        fields = (
+            'paymente',
+            'quantity',
+        )
 
 
 class CustumerForm(forms.ModelForm):

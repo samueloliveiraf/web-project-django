@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Quandidade vendida</th>
+            <th scope="col">Forma de pagemento</th>
+            <th scope="col">Data da Venda</th>
+            <th scope="col">Valor Unitário</th>
+            <th scope="col">Valor da venda</th>
+            <th scope="col">Imprimir Cupom</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sale in sales %}
+        <tr>
+            <th scope="row">{{ sale.product.title }}</th>
+            <td>{{ sale.quantity }}</td>
+            <td>{{ sale.payment }}</td>
+            <td>{{ sale.time }}</td>
+            <td>{{ sale.product.price }}</td>
+            <td>{{ sale.total_sale }}</td>
+            <td>
+                <a href="{% url 'pdf' sale.id %}">
+                    <i class="fas fa-print fa-2x"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+
+
+
+
+
+

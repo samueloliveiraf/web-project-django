@@ -9,8 +9,7 @@
         <div class="col-md-10">
             <div class="row p-2 bg-white">
                 <div class="col-md-3 mt-1">
-                    <img class="img-fluid img-responsive rounded product-image"
-                        src="{{ product.image.url }}">
+                    <img class="img-fluid img-responsive rounded product-image" src="{{ product.image.url }}">
                 </div>
                 <div class="col-md-6 mt-1">
                     <h5>Produto: {{ product.title }}</h5>
@@ -26,16 +25,23 @@
                                 Editar <i class="fas fa-edit fa-lg"></i>
                             </button>
                         </a>
-                        <a href="{% url 'delete-product' product.id %}">
-                            <button class="btn btn-dark" type="button">
-                                Excluir <i class="fas fa-trash fa-lg"></i>
-                            </button>
-                        </a>
-                        <a href="">
-                            <button class="btn btn-dark" type="button">
+                        {% include 'products/confime_delete_product.html' %}
+                        {% if product.quantity == 0 %}
+
+                        {% else %}
+                        <form action="{% url 'sale_product' product.id %}" class="form-sale" method="POST"> 
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="text-sale">Informar a quantidade!</label>
+                                <input type="number" required class="form-control" name="quantity" min="1" />
+                            </div>
+
+                            <button type="submit" class="btn btn-success" type="button">
                                 Vender <i class="fas fa-money-check-alt fa-lg"></i>
                             </button>
-                        </a>
+                        </form>
+
+                        {% endif %}
                     </div>
                 </div>
             </div>
