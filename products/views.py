@@ -23,7 +23,7 @@ class CreateProduct(CreateView):
 
 class ListProducts(ListView):
     model = Product
-    paginate_by = 4
+    paginate_by = 8
     ordering = ['-date']
 
     def get_queryset(self):
@@ -101,16 +101,17 @@ def sale_product(request, id_product):
     quantity = request.POST.get("quantity")
     payment = request.POST.get("payment")
 
-    sales = Sale(
-        quantity=quantity,
-        product=product, 
-        payment=payment,
-        user=request.user,
-    )
-    sales.save()
-    
-    product.quantity = product.quantity-int(quantity)
-    product.save()
+    if product.quantity > 0:
+        sales = Sale(
+            quantity=quantity,
+            product=product, 
+            payment=payment,
+            user=request.user,
+        )
+        sales.save()
+        
+        product.quantity = product.quantity-int(quantity)
+        product.save()
 
     context = {
         'sales': sales,

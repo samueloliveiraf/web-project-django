@@ -15,12 +15,14 @@
 {% endfor %}
 {% endif %}
 
-<form method="POST" enctype="multipart/form-data" class="container mt-5 mb-5 shadow p-3 mb-5 bg-white rounded"> {% csrf_token %}
-    <h2>Produtos</h2>
-
-    {{ form|bootstrap }}
-
-    <button class="btn btn-dark btn-style" type="submit"> Salvar</button>
-</form>
+<div class="container">
+    <form method="POST" enctype="multipart/form-data" class="container-form"> {% csrf_token %}
+        <h2>Produtos</h2>
+    
+        {{ form|bootstrap }}
+    
+        <button class="btn-sale" type="submit"> Salvar</button>
+    </form>
+</div>
 
 {% endblock %}

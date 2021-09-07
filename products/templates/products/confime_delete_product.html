@@ -1,7 +1,7 @@
 <a href="#myModal" data-toggle="modal">
-    <button type="button" class="btn-apagar btn btn-danger btn-sm">
-        Excluir <i class="fas fa-trash fa-lg"></i>
-    </button>
+    <i class="far fa-trash-alt fa-2x" 
+        style="color: #EB5757; margin-left: 12px;">
+    </i>
 </a>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -37,6 +37,10 @@
 
 <style>
 
+    .fas .fa-trash {
+        color: rgb(209, 45, 45);
+    } 
+
     .btn-apagar {
         width: 100px;
     }
@@ -49,7 +53,7 @@
 
     .modal-confirm .modal-content {
         padding: 20px;
-        border-radius: 5px;
+        border-radius: 26px;
         border: none;
         text-align: center;
         font-size: 14px;
@@ -122,6 +126,7 @@
 
     .modal-confirm .btn-secondary {
         background: #c1c1c1;
+        border-radius: 26px;
     }
 
     .modal-confirm .btn-secondary:hover,
@@ -131,6 +136,7 @@
 
     .modal-confirm .btn-danger {
         background: #f15e5e;
+        border-radius: 26px;
     }
 
     .modal-confirm .btn-danger:hover,
