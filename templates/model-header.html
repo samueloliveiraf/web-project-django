@@ -1,37 +1,89 @@
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'creat-product' %}">Cadastrar Produtos</a>
-                </li>
-         
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'list-company' %}">Ações Empresa</a>
-                </li>
-          
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'list_sales' %}">Lista Vendas</a>
-                </li>
-            </ul>
-            <form class="d-flex" action="{% url 'search_products' %}">
-                <input class="form-control me-2" type="search" name="title" placeholder="Buscar por nome">
-                <button class="btn-seach" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'logout' %}">
-                    <strong>Sair</strong>
-                </a>
-            </li>
+<!--========== HEADER ==========-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+<header class="header" style="border-radius: 26px;">
+    <div class="header__container">
+
+        <a href="{% url 'home' %}" class="header__logo" 
+            style="text-decoration: none; transition: 0.3s;">
+            {% if user.is_authenticated %}
+            Bem vindo, {{ user.get_username }}. Obrigado por ser nosso cliente.
+            {% endif %}
+        </a>
+
+        <form class="d-flex" action="{% url 'search_products' %}">
+            <input type="search" style="text-align: center;" name="title" placeholder="Buscar por nome"
+                class="header__input">
+
+            <button class="btn-seach" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+
+        <div class="header__toggle">
+            <i class='bx bx-menu' id="header-toggle"></i>
         </div>
     </div>
-</nav>
+</header>
+
+<!--========== NAV ==========-->
+<div class="nav" id="navbar" style="border-radius: 26px; margin-left: 5px;">
+    <nav class="nav__container">
+        <div>
+            <a href="{% url 'home' %}" class="nav__link nav__logo" style="text-decoration: none; transition: 0.3s;">
+                <i class='bx bxs-disc nav__icon'></i>
+                <span class="nav__logo-name">Bedimcode</span>
+            </a>
+
+            <div class="nav__list">
+                <div class="nav__items">
+                    <h3 class="nav__subtitle">Menu</h3>
+
+                    <a href="{% url 'home' %}" class="nav__link active" style="text-decoration: none; transition: 0.3s;">
+                        <i class='bx bx-home nav__icon'></i>
+                        <span class="nav__name">Home</span>
+                    </a>
+
+                    <div class="nav__dropdown">
+                        <div class="nav__link" style="text-decoration: none; transition: 0.3s;">
+                            <i class='bx bx-user nav__icon'></i>
+                            <span class="nav__name">Funções do Usuário</span>
+                            <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                        </div>
+
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                <a href="{% url 'creat-product' %}" 
+                                    class="nav__dropdown-item" style="text-decoration: none; transition: 0.3s;">
+                                    Cadastrar Produto
+                                </a>
+                                <a href="{% url 'list-company' %}" 
+                                    class="nav__dropdown-item" style="text-decoration: none; transition: 0.3s;"> 
+                                    Ações Empresa
+                                </a>
+                                <a href="{% url 'list_sales' %}" 
+                                    class="nav__dropdown-item" style="text-decoration: none; transition: 0.3s;"> 
+                                    Lista Vendas
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="{% url 'logout' %}" class="nav__link nav__logout" 
+            style="text-decoration: none; transition: 0.3s;">
+            <i class='bx bx-log-out nav__icon'></i>
+            <span class="nav__name">Sair</span>
+        </a>
+    </nav>
+</div>
+
+<main>
+    <section>
+        <p style="color: transparent;">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        </p>
+    </section>
+</main>

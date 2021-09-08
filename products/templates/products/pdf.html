@@ -81,7 +81,9 @@
     <table class="printer-ticket">
         <thead>
             <tr>
-                <th class="title" colspan="3">Nome Empresa</th>
+                {% for company in companys %}
+                <th class="title" colspan="3">{{ company.name }}</th>
+                {% endfor %}
             </tr>
             <tr>
                 <th class="ttu" colspan="3">

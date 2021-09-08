@@ -11,7 +11,6 @@ from django.views.generic import (
     CreateView
 )
 
-
 class CreateProduct(CreateView):
     model = Product
     form_class = CustumerForm
@@ -45,6 +44,7 @@ class DeleteProduct(DeleteView):
 @login_required(login_url='/accounts/login/')
 def list_sales(request):
     template_name = 'products/list_sales.html'
+
     sales = Sale.objects.filter(
         user=request.user
     )
@@ -59,15 +59,6 @@ def list_sales(request):
     }
 
     return render(request, template_name, context)
-
-
-class ListSales(ListView):
-    model = Sale
-    paginate_by = 80
-
-    def get_queryset(self):
-        queryset = super(ListSales, self).get_queryset()
-        queryset = queryset.filter(user=self.request.user)
 
 
 @login_required(login_url='/accounts/login/')

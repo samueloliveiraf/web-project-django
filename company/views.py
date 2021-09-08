@@ -35,3 +35,17 @@ def list_company(request):
 
     return render(request, template_name, context)
 
+
+@login_required(login_url='/accounts/login/')
+def list_company_home(request):
+    template_name = 'company/page_company.html'
+    companys = Company.objects.filter(
+        user=request.user
+    )
+
+    context = {
+        'companys': companys,
+    }
+
+    return render(request, template_name, context)
+

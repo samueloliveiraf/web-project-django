@@ -4,7 +4,7 @@
 
 {% for product in object_list %}
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" style="margin-top: 30px;" >
     <div class="d-flex justify-content-center row">
         <div class="col-md-10">
             <div class="row p-2 bg-white">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-6 mt-1">
                     <h5>Produto: {{ product.title }}</h5>
-                    <p class="text-justify">Detalhamento: {{product.details}}<br><br></p>
+                    <p class="text-justify">Detalhamento: {{ product.details }}<br><br></p>
                     <a href="{% url 'edit-product' product.id %}">
                        <i class="fas fa-edit fa-2x" style="color: #2D9CDB"></i>
                     </a>

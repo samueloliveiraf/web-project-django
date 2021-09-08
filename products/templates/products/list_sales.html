@@ -2,16 +2,15 @@
 
 {% block main %}
 
-<table class="table table-hover">
+<table class="table table-hover" style="margin-top: 35px;">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Quandidade vendida</th>
-            <th scope="col">Forma de pagemento</th>
+            <th scope="col">Quandidade</th>
+            <th scope="col">Pagemento</th>
             <th scope="col">Data da Venda</th>
-            <th scope="col">Valor Unitário</th>
-            <th scope="col">Valor da venda</th>
-            <th scope="col">Imprimir Cupom</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Imprimir</th>
         </tr>
     </thead>
     <tbody>
@@ -21,11 +20,10 @@
             <td>{{ sale.quantity }}</td>
             <td>{{ sale.payment }}</td>
             <td>{{ sale.time }}</td>
-            <td>{{ sale.product.price }}</td>
             <td>{{ sale.total_sale }}</td>
             <td>
                 <a href="{% url 'pdf' sale.id %}">
-                    <i class="fas fa-print fa-2x"></i>
+                    <img class="image-icon" src="https://user-images.githubusercontent.com/44476076/132591720-75204096-e0af-4cb0-b56b-6523f30e1ec7.png" alt="">
                 </a>
             </td>
         </tr>
@@ -34,10 +32,3 @@
 </table>
 
 {% endblock %}
-
-
-
-
-
-
-
