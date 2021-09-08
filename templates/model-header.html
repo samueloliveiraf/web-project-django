@@ -5,7 +5,7 @@
     <div class="header__container">
 
         <a href="{% url 'home' %}" class="header__logo" 
-            style="text-decoration: none; transition: 0.3s;">
+            style="text-decoration: none; transition: 0.2s;">
             {% if user.is_authenticated %}
             Bem vindo, {{ user.get_username }}. Obrigado por ser nosso cliente.
             {% endif %}
@@ -30,7 +30,7 @@
 <div class="nav" id="navbar" style="border-radius: 26px; margin-left: 5px;">
     <nav class="nav__container">
         <div>
-            <a href="{% url 'home' %}" class="nav__link nav__logo" style="text-decoration: none; transition: 0.3s;">
+            <a href="{% url 'home' %}" class="nav__link nav__logo" style="text-decoration: none; transition: 0.2s;">
                 <i class='bx bxs-disc nav__icon'></i>
                 <span class="nav__logo-name">Bedimcode</span>
             </a>
@@ -39,13 +39,13 @@
                 <div class="nav__items">
                     <h3 class="nav__subtitle">Menu</h3>
 
-                    <a href="{% url 'home' %}" class="nav__link active" style="text-decoration: none; transition: 0.3s;">
+                    <a href="{% url 'home' %}" class="nav__link active" style="text-decoration: none; transition: 0.2s;">
                         <i class='bx bx-home nav__icon'></i>
                         <span class="nav__name">Home</span>
                     </a>
 
                     <div class="nav__dropdown">
-                        <div class="nav__link" style="text-decoration: none; transition: 0.3s;">
+                        <div class="nav__link" style="text-decoration: none; transition: 0.2s;">
                             <i class='bx bx-user nav__icon'></i>
                             <span class="nav__name">Funções do Usuário</span>
                             <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -54,15 +54,15 @@
                         <div class="nav__dropdown-collapse">
                             <div class="nav__dropdown-content">
                                 <a href="{% url 'creat-product' %}" 
-                                    class="nav__dropdown-item" style="text-decoration: none; transition: 0.3s;">
+                                    class="nav__dropdown-item" style="text-decoration: none; transition: 0.2s;">
                                     Cadastrar Produto
                                 </a>
                                 <a href="{% url 'list-company' %}" 
-                                    class="nav__dropdown-item" style="text-decoration: none; transition: 0.3s;"> 
+                                    class="nav__dropdown-item" style="text-decoration: none; transition: 0.2s;"> 
                                     Ações Empresa
                                 </a>
                                 <a href="{% url 'list_sales' %}" 
-                                    class="nav__dropdown-item" style="text-decoration: none; transition: 0.3s;"> 
+                                    class="nav__dropdown-item" style="text-decoration: none; transition: 0.2s;"> 
                                     Lista Vendas
                                 </a>
                             </div>
@@ -73,7 +73,7 @@
         </div>
 
         <a href="{% url 'logout' %}" class="nav__link nav__logout" 
-            style="text-decoration: none; transition: 0.3s;">
+            style="text-decoration: none; transition: 0.2s;">
             <i class='bx bx-log-out nav__icon'></i>
             <span class="nav__name">Sair</span>
         </a>
