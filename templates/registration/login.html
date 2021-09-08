@@ -22,6 +22,7 @@
 <body>
 
     <div class="container">
+
         <button class="home-login">
             <i class="fas fa-home"></i>
         </button>
@@ -45,11 +46,14 @@
                 </button>
             </div>
 
+            {% if form.errors %}
+            <div class="alert alert-danger" style="margin-top: 8px;" role="alert">
+                Usuário ou Senha errado.
+            </div>
+            {% endif %}
+
         </form>
 
-        {% for message in messages %}
-            <div class="alert alert-danger">{{ message }}</div>
-        {% endfor %}
     </div>
 
 </body>
