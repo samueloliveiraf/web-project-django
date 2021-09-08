@@ -1,8 +1,8 @@
 from products.form import *
 from django.urls import reverse_lazy
-from django.contrib import messages
 from .models import *
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from django.views.generic import (
     ListView,
@@ -42,6 +42,7 @@ class DeleteProduct(DeleteView):
     success_url = reverse_lazy('home')
 
 
+@login_required(login_url='/accounts/login/')
 def list_sales(request):
     template_name = 'products/list_sales.html'
     sales = Sale.objects.filter(
@@ -69,6 +70,7 @@ class ListSales(ListView):
         queryset = queryset.filter(user=self.request.user)
 
 
+@login_required(login_url='/accounts/login/')
 def delete_product(request, id_product):
     product = Product.objects.get(
         id=id_product,
@@ -79,7 +81,7 @@ def delete_product(request, id_product):
 
     return redirect('home')
 
-
+@login_required(login_url='/accounts/login/')
 def search_products(request):
     template_name = 'search_product.html'
     title = request.GET.get('title')
@@ -94,6 +96,7 @@ def search_products(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='/accounts/login/')
 def sale_product(request, id_product):
     template_name = 'sale_product.html'
     product = Product.objects.get(id=id_product, user=request.user)

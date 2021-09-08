@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+{% if user.is_authenticated %}
+<div class="container head-style">
+
+    <h2 style="font-weight: 600; color: #333333;">
+        EMPRESA
+        <i class="fas fa-building"></i>
+    </h2>
+
+    {% if user.company %}
+        {% for company in companys %}
+        <h3 style="color: #333333;">{{ company.name }}</h3>  
+        <a class="btn-sale" href="{% url 'edit-company' company.id %}">
+            <button class="btn-company">
+                Editar
+            </button>
+        </a>
+        {% endfor %}
+        {% else %}
+        <a class="btn-sale" href="{% url 'creat-company' %}">
+            <button class="btn-company">
+                Cadastre
+            </button>
+        </a>
+    {% endif %}
+
+{% endif %}
+
+{% endblock %}

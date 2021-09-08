@@ -4,7 +4,7 @@
 
 {% for product in products %}
 
-<div class="container mt-5 mb-5 shadow p-3 mb-5 bg-white rounded">
+<div class="container mt-5 mb-5">
     <div class="d-flex justify-content-center row">
         <div class="col-md-10">
             <div class="row p-2 bg-white">
@@ -14,29 +14,35 @@
                 <div class="col-md-6 mt-1">
                     <h5>Produto: {{ product.title }}</h5>
                     <p class="text-justify">Detalhamento: {{product.details}}<br><br></p>
+                    <a href="{% url 'edit-product' product.id %}">
+                       <i class="fas fa-edit fa-2x" style="color: #2D9CDB"></i>
+                    </a>
+                    {% include 'products/confime_delete_product.html' %}
                 </div>
                 <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                     <div class="d-flex flex-row align-items-center">
-                        <h4 class="mr-1">$13.99</h4><span class="strike-text">Qtd: {{ product.quantity }}</span>
+                        <h4 class="mr-1">{{ product.price }}</h4>
+                        <span class="strike-text">Qtd: {{ product.quantity }}</span>
                     </div>
-                    <div class="d-flex flex-column">
-                        <a href="{% url 'edit-product' product.id %}">
-                            <button class="btn btn-dark" type="button">
-                                Editar <i class="fas fa-edit fa-lg"></i>
-                            </button>
-                        </a>
-                        {% include 'products/confime_delete_product.html' %}
+                    <div class="">
                         {% if product.quantity == 0 %}
 
                         {% else %}
-                        <form action="{% url 'sale_product' product.id %}" class="form-sale" method="POST"> 
-                            {% csrf_token %}
+                        <form action="{% url 'sale_product' product.id %}" class="form-sale" method="POST"> {% csrf_token %}
                             <div class="form-group">
-                                <label class="text-sale">Informar a quantidade!</label>
-                                <input type="number" required class="form-control" name="quantity" min="1" />
+                                <input type="number" placeholder="Informar a quantidade" required class="form-control" name="quantity" min="1" />
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" id="forma-payment" name="payment">
+                                    <option value="0" disabled="true" selected="true">Selecione pagamento
+                                    </option>
+                                    <option name="dinheiro" value="dinheiro">Dinheiro</option>
+                                    <option name="cartao-credito" value="cartao-credito">Cartão de Crédito</option>
+                                    <option name="cartao-debito" value="cartao-debito">Cartão de Debito</option>
+                                </select>
                             </div>
 
-                            <button type="submit" class="btn btn-success" type="button">
+                            <button type="submit" class="btn-sale" type="button">
                                 Vender <i class="fas fa-money-check-alt fa-lg"></i>
                             </button>
                         </form>
