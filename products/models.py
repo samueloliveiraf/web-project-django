@@ -34,7 +34,7 @@ class Sale(models.Model):
     quantity = models.IntegerField()
 
     class Meta:
-        ordering = ('time',)
+        ordering = ['-id']
 
     def total_sale(self):
         total = self.product.price * self.quantity
