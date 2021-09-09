@@ -1,6 +1,7 @@
 from django.contrib.messages import constants as messages
 from pathlib import Path
 from decouple import config
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -14,9 +15,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)@ejv*%95i)$ldg0e)=*@d*sx%3oo!*s!(7szbh=iv7kutn!&y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['crm-devsamuel.herokuapp.com']
 
 
 # Application definition
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -72,17 +74,9 @@ WSGI_APPLICATION = 'app_web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
-    }
-}
+DATABASES = {}
 
+DATABASES['default'] = dj_database_url.config(default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}")
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -137,6 +131,8 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
